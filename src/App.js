@@ -36,23 +36,34 @@ async function postHeaderHome() {
     const res = await fetch(API_MOVIE);
     const data = await res.json();
     let movies = await data.results;
-    let constador = 0;
-    let movie = movies[constador];
+    let contador = 0;
+    let movie = movies[contador];
 
     const moviePostHeaderHome = document.querySelector(".movie-list-popu");
-    moviePostHeaderHome.style.backgroundImage = `url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movies[constador].backdrop_path})`;
+    moviePostHeaderHome.style.backgroundImage = `url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movies[contador].backdrop_path})`;
 
     const moviePost = document.querySelector("#headerMovie");
 
     contentMovieHome(movie)
 
-    setInterval(() => {
-        constador += 1 
-        removeDestMovieHome()
-        movie = movies[constador];   
-        contentMovieHome (movie)
-    },10000)
+    const sliderHome = setInterval(sliderTimer, 10000);
 
+    function sliderTimer() {
+        contador += 1 
+        if(contador != 20) {
+            removeDestMovieHome();
+            movie = movies[contador];   
+            contentMovieHome(movie);
+        }else{
+            clearInterval(myStop())
+        }
+    }
+
+    const myStop = () => {
+        clearInterval(sliderHome);
+    }
+
+    
     function contentMovieHome (movie) {
         moviePostHeaderHome.style.backgroundImage = `url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movie.backdrop_path})`;
 
@@ -73,9 +84,11 @@ async function postHeaderHome() {
         const hola = document.querySelector(".movie-degraded"); 
         hola.remove(); 
     }
+
 }
 getTrendsPreview()
 postHeaderHome()
+
 
 // moviePostHeaderHome.animate([
             
