@@ -1,12 +1,22 @@
 {
   "name": "pelisapp",
   "version": "1.0.0",
-  "description": "",
+  "description": "I use a API of movie for practices",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Christian Astudillo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Christian1an/pelisApp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Christian1an/pelisApp/issues"
+  },
+  "homepage": "https://github.com/Christian1an/pelisApp#readme",
+  "dependencies": {
+  }
 }

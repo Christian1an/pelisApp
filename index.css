@@ -71,6 +71,7 @@ p{
     font-family: var(--fuenteterciaria);
     font-size: 1.6rem;
     color: var(--blanco);
+    white-space: pre-wrap;
 }
 
 .flex{
@@ -141,15 +142,18 @@ p{
 }
 
 .movie-list-popu{
-    background-image: url("./src/image/luca-pelicula.jpg");
     background-size: cover;
     background-repeat: none;
     background-position: center;
     height: 85vh;
     width: 100%;
+
+    animation-name: animate;
+    animation-duration: 15s;
 }
 
-.movie-degraded{
+
+.movie-degraded{ 
     position: relative;
     background: rgb(21,21,21);
     background: linear-gradient(0deg, rgba(21,21,21,1) 0%, rgba(255,255,255,0) 50%);
@@ -159,6 +163,11 @@ p{
     flex-direction: column;
     justify-content: end;
     color: var(--blanco);
+}
+
+.dest-home{
+    padding: 1rem;
+    max-width: 70rem;
 }
 
 .content-infomovie-header{
@@ -201,7 +210,7 @@ p{
     cursor: pointer;
 }
 .contenedor-movie-small{
-    height: 40rem;
+    height: 45rem;
     min-width: 22rem;
     border-radius: 15px;
     background-color: var(--primario2);
@@ -214,6 +223,7 @@ p{
     font-size: 1.4rem;
     font-weight: bold;
     margin: 0;
+    padding: 0 1rem;
 }
 .small-image-date{
     color: rgb(198, 197, 197);
@@ -344,7 +354,7 @@ footer{
 footer p{
     color: var(--secundario);
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1rem;
     margin: 0;
 }
 

@@ -29,57 +29,27 @@ function navigator() {
   }
 }
 
-function homePage() {
-  genericListMovie.classList.add("inactive");
-  movie.classList.remove("container-movie-description");
-  movie.style.background = '';
-  movie.remove("container-mini-movie");
-  similarMovieSection.classList.add("inactive");
+function trendsPage(){
+  headerMovieHome.classList.add("inactive");
+  trendMovieSection.classList.add("inactive");
+  searchMovieSection.classList.add("inactive")
+  categorisTrendSection.classList.add("inactive");
+  genericListMovie.classList.remove("inactive")
 }
 
 function searchPage(){
-  console.log({ searchMovie });
+  headerMovieHome.classList.add("inactive");
   trendMovieSection.classList.add("inactive");
   categorisTrendSection.classList.add("inactive");
-  headerMovieHome.classList.remove("movie-list-popu");
-  degrade.classList.add("inactive");
-  genericListMovie.classList.remove("inactive");
-  movie.classList.remove("container-movie-description");
-  movie.remove("container-mini-movie");
-  similarMovieSection.classList.add("inactive");
-}
+  genericListMovie.classList.remove("inactive")
+} 
 
 function movieDetailsPage(){
+  headerMovieHome.classList.add("inactive");
   trendMovieSection.classList.add("inactive");
   categorisTrendSection.classList.add("inactive");
-  headerMovieHome.classList.remove("movie-list-popu");
-  degrade.classList.add("inactive");
-  genericListMovie.classList.add("inactive");
-
+  movie.classList.remove("inactive")
+  similarMovieSection.classList.remove("inactive")
 }
 
-function categoriesPage() {
-  console.log({ searchMovie });
-  searchMovieSection.classList.add("inactive")
-  trendMovieSection.classList.add("inactive");
-  categorisTrendSection.classList.add("inactive");
-  headerMovieHome.classList.remove("movie-list-popu");
-  degrade.classList.add("inactive");
-  genericListMovie.classList.remove("inactive");
-  movie.classList.remove("container-movie-description");
-  movie.remove("container-mini-movie");
-  similarMovieSection.classList.add("inactive");
-}
 
-function trendsPage() {
-  console.log({ searchMovie });
-  searchMovieSection.classList.add("inactive")
-  trendMovieSection.classList.add("inactive");
-  categorisTrendSection.classList.add("inactive");
-  headerMovieHome.classList.remove("movie-list-popu");
-  degrade.classList.add("inactive");
-  genericListMovie.classList.remove("inactive");
-  movie.classList.remove("container-movie-description");
-  movie.remove("container-mini-movie");
-  similarMovieSection.classList.add("inactive");
-}

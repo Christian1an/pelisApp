@@ -106,3 +106,5 @@ dist
 # imagenes 
 src/image/*jpg
 src/image/*jpeg
+#Api.key
+src/secrets.js
