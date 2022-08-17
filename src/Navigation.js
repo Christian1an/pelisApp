@@ -3,7 +3,7 @@ searchIcon.addEventListener('click', () => {
   });
 
   arrowBtn.addEventListener('click', () => {
-    location = "";
+    location = " ";
   });
 
   seeMoreBtn.addEventListener('click', () => {
@@ -24,9 +24,19 @@ function navigator() {
     movieDetailsPage();
   } else if (location.hash.startsWith('#category=')) {
     categoriesPage();
-  } else {
+  }else {
     homePage();
   }
+}
+
+function homePage() {
+  headerMovieHome.classList.remove("inactive");
+  trendMovieSection.classList.remove("inactive");
+  categorisTrendSection.classList.remove("inactive");
+  genericListMovie.classList.add("inactive")
+  getTrendsPreview()
+  postHeaderHome()
+  getTrendsCategory()
 }
 
 function trendsPage(){
@@ -41,7 +51,7 @@ function searchPage(){
   headerMovieHome.classList.add("inactive");
   trendMovieSection.classList.add("inactive");
   categorisTrendSection.classList.add("inactive");
-  genericListMovie.classList.remove("inactive")
+  genericListMovie.classList.remove("inactive");
 } 
 
 function movieDetailsPage(){
@@ -52,4 +62,15 @@ function movieDetailsPage(){
   similarMovieSection.classList.remove("inactive")
 }
 
+function categoriesPage() {
+  headerMovieHome.classList.add("inactive");
+  trendMovieSection.classList.add("inactive");
+  categorisTrendSection.classList.add("inactive");
+  genericListMovie.classList.remove("inactive");
+
+  const[ , categoryDate] = location.hash.split("=")
+  const[categoryId, nombreCategory] = categoryDate.split("-")
+  
+  getCategoryMovieList(categoryId, nombreCategory)
+}
 

@@ -37,31 +37,15 @@
         </section>
         <section id="categori">
             <h3>categori</h3>
-            <div class="container-categori">
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
-                <p class="categori">Action</p>
+            <div id="categoryContainer" class="container-categori">
             </div>
         </section>
         <section id="genericList" class="search-container inactive">
-            <section>
+            <section id="categoryContainerTittle">
                 <i id="arrowHome" class="fa-solid fa-angle-left return"></i>
-                <h3 class="categori-tittle">Action</h3>
             </section>
-            <article class="search-similar-movie">
-                <img class="movie-small-search" src="./src/image/los-increibles.jpeg" alt="">
-                <img class="movie-small-search" src="./src/image/los-increibles.jpeg" alt="">
-                <img class="movie-small-search" src="./src/image/los-increibles.jpeg" alt="">
-                <img class="movie-small-search" src="./src/image/los-increibles.jpeg" alt="">
-                <img class="movie-small-search" src="./src/image/los-increibles.jpeg" alt="">
+            <article id="movieByCategory" class="search-similar-movie">
+                <!-- <img class="movie-small-search" src="./src/image/los-increibles.jpeg" alt=""> -->
             </article>
         </section>
         <section id="movie" class="container-movie-description inactive">
@@ -117,9 +101,15 @@
                 </div>
             </article>        
         </section>
+        <!-- <section id="Error404" class="note inactive">
+            <h1 class="note-error">Perdón no se encontro lo que estabas buscando</h1>
+            <h1 class="note-error">Error 404</h1>
+            <i class="fa-solid fa-clapperboard note-image"></i>
+        </section> -->
         <footer>
             <p>Hecho por Christian Astudillo</p>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="./src/index.js"></script>
         <script src="./src/Navigation.js"></script>
         <script src="./src/secrets.js"></script>

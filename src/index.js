@@ -6,7 +6,7 @@ const categorisTrendSection = document.querySelector("#categori");
 const genericListMovie = document.querySelector("#genericList");
 const movie = document.querySelector("#movie");
 const similarMovieSection = document.querySelector("#similarMovie");
-
+const errorSearch = document.querySelector("#Error404")
 
 //list & Components 
 const searchMovie = document.querySelector("#searchBar");
@@ -26,7 +26,6 @@ const searchInput = document.querySelector(".search-input");
 const seeMoreBtn = document.querySelector("#seeMore");
 
 const arrowBtn = document.querySelector("#arrowHome");
-const categoriTittle = document.querySelector(".categori-tittle");
 
 const moviePost = document.querySelector(".container-mini-movie");
 const moviePostTittle = document.querySelector(".movie-title-post");
