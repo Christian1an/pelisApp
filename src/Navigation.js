@@ -1,5 +1,8 @@
-searchIcon.addEventListener('click', () => {
-    location.hash = "#search=";
+window.addEventListener('DOMContentLoaded', navigator, false);
+window.addEventListener('hashchange', navigator, false);
+  
+  searchIcon.addEventListener('click', () => {
+    location.hash = "#search=" + searchInput.value;
   });
 
   arrowBtn.addEventListener('click', () => {
@@ -9,9 +12,6 @@ searchIcon.addEventListener('click', () => {
   seeMoreBtn.addEventListener('click', () => {
     location.hash = '#trends';
   });
-
-window.addEventListener('DOMContentLoaded', navigator, false);
-window.addEventListener('hashchange', navigator, false);
 
 function navigator() {
   console.log({ location });
@@ -27,6 +27,8 @@ function navigator() {
   }else {
     homePage();
   }
+
+
 }
 
 function homePage() {
@@ -52,6 +54,12 @@ function searchPage(){
   trendMovieSection.classList.add("inactive");
   categorisTrendSection.classList.add("inactive");
   genericListMovie.classList.remove("inactive");
+
+
+  const [ ,query] = location.hash.split("=")
+  console.log(query)
+
+  getSearchMovieQuery(query)
 } 
 
 function movieDetailsPage(){

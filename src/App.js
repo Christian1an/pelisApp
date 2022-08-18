@@ -114,6 +114,7 @@ async function getTrendsCategory() {
     });
 }
 
+//search movie by category 
 async function getCategoryMovieList(id, name){
     const { data } = await api('discover/movie', {
         params: {
@@ -129,6 +130,28 @@ async function getCategoryMovieList(id, name){
     categoryTitle.classList.add("categori-tittle");
     categoryContainer.appendChild(categoryTitle);
 
+
+    movies.forEach(movie => {
+        const movieImg = document.createElement("IMG");
+        movieImg.classList.add("movie-small-image");
+        movieImg.setAttribute("alt", movie.title);
+        movieImg.setAttribute("src", `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster_path}`);
+        movieByCategory.appendChild(movieImg)
+    });
+
+}
+
+async function getSearchMovieQuery(query){
+    
+    const { data } = await api('search/movie', {
+        params: {
+          query
+        },
+      });
+      const movies = data.results;
+      console.log(movies)
+    const movieByCategory = document.querySelector('#movieByCategory');
+    movieByCategory.innerHTML = " "
 
     movies.forEach(movie => {
         const movieImg = document.createElement("IMG");
