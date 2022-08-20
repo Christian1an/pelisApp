@@ -83,6 +83,7 @@ p{
     color: var(--secundario);
     margin: 0.5rem;
     text-align: center;
+    cursor: pointer;
 }
 .navegation{
     height: 2rem;
@@ -309,6 +310,7 @@ p{
     background-color: var(--primario2);
     border-radius: 25px 25px 0px 0px;
     padding: 2rem;
+    width: 100%;
 }
 .container-mini-movie{
     height: 2rem;

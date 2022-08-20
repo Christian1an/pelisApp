@@ -7,6 +7,53 @@ const api = axios.create({
       'api_key': API_KEY,
     },
   });
+
+//create movie
+function createNewMovie(container, value){
+    container.innerHTML = "";
+
+    value.forEach(movie => {
+        const movieContainer = document.createElement('div');
+        movieContainer.classList.add('movie-container');
+        movieContainer.addEventListener('click', () => {
+          location.hash = '#movie=' + movie.id;
+        });
+
+        const movieImg = document.createElement("IMG");
+        movieImg.classList.add("movie-small-image");
+        movieImg.setAttribute("alt", movie.title);
+        movieImg.setAttribute("src", `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster_path}`);
+        movieContainer.appendChild(movieImg)
+        movieByCategory.appendChild(movieContainer)
+    });
+}  
+function createMovieOfHome(movies, container){
+    container.innerHTML = " ";
+    movies.forEach(movie => {
+        const movieContainer = document.createElement("DIV")
+        movieContainer.classList.add("contenedor-movie-small")
+        movieContainer.addEventListener("click", () => {
+            location.hash = "#movie=" + movie.id;
+        })
+
+        const movieImg = document.createElement("IMG");
+        movieImg.classList.add("movie-small-image");
+        movieImg.setAttribute("alt", movie.title);
+        movieImg.setAttribute("src", `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster_path}`);
+
+        const movieTittlePosterPath = document.createElement("P");
+        movieTittlePosterPath.classList.add("small-image-name");
+        movieTittlePosterPath.textContent = movie.title;
+
+        const movieTittlePosterDate = document.createElement("P");
+        movieTittlePosterDate.classList.add("small-image-date");
+        movieTittlePosterDate.textContent = movie.release_date;
+
+
+        movieContainer.append(movieImg, movieTittlePosterPath, movieTittlePosterDate);
+        container.appendChild(movieContainer);
+    });
+}
   
 //home slider header
 async function postHeaderHome() {
@@ -14,8 +61,8 @@ async function postHeaderHome() {
     const movies = data.results;
     let contador = 0;
     let movie = movies[contador];
-
     const moviePostHeaderHome = document.querySelector(".movie-list-popu");
+    moviePostHeaderHome.innerHTML = " "
     moviePostHeaderHome.style.backgroundImage = `url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movies[contador].backdrop_path})`;
 
     const moviePost = document.querySelector("#headerMovie");
@@ -67,31 +114,8 @@ async function postHeaderHome() {
 async function getTrendsPreview () {
     const { data } = await api('trending/movie/day');
     const movies = data.results;
-
-    movies.forEach(movie => {
-        const trendingPreviewMoviesContainer = document.querySelector("#moviePopular--list")
-
-        const movieContainer = document.createElement("DIV")
-        movieContainer.classList.add("contenedor-movie-small")
-
-        const movieImg = document.createElement("IMG");
-        movieImg.classList.add("movie-small-image");
-        movieImg.setAttribute("alt", movie.title);
-        movieImg.setAttribute("src", `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster_path}`);
-
-        const movieTittlePosterPath = document.createElement("P");
-        movieTittlePosterPath.classList.add("small-image-name");
-        movieTittlePosterPath.textContent = movie.title;
-
-        const movieTittlePosterDate = document.createElement("P");
-        movieTittlePosterDate.classList.add("small-image-date");
-        movieTittlePosterDate.textContent = movie.release_date;
-
-
-        movieContainer.append(movieImg, movieTittlePosterPath, movieTittlePosterDate);
-        trendingPreviewMoviesContainer.appendChild(movieContainer);
-    });
-
+    const trendingPreviewMoviesContainer = document.querySelector("#moviePopular--list")
+    createMovieOfHome(movies, trendingPreviewMoviesContainer)
 }
 
 // Category movie list 
@@ -99,9 +123,10 @@ async function getTrendsCategory() {
     const { data } = await api('genre/movie/list');
     const category = data.genres;
 
-    category.forEach(category => {
-        const categoryPreviewContainer = document.querySelector("#categoryContainer")
+    const categoryPreviewContainer = document.querySelector("#categoryContainer")
+    categoryPreviewContainer.innerHTML = " ";
 
+    category.forEach(category => {
         const categoryContainer = document.createElement("P");
         categoryContainer.classList.add("categori");
         categoryContainer.textContent = category.name;
@@ -122,25 +147,15 @@ async function getCategoryMovieList(id, name){
         },
       });
       const movies = data.results;
-      console.log(movies)
-    const categoryContainer = document.querySelector("#categoryContainerTittle");
+    const categoryContainer = document.querySelector("#categoryTitleSearch");
+    categoryContainer.textContent = name;
     const movieByCategory = document.querySelector('#movieByCategory');
-    const categoryTitle = document.createElement("h3");
-    categoryTitle.textContent = name;
-    categoryTitle.classList.add("categori-tittle");
-    categoryContainer.appendChild(categoryTitle);
 
-
-    movies.forEach(movie => {
-        const movieImg = document.createElement("IMG");
-        movieImg.classList.add("movie-small-image");
-        movieImg.setAttribute("alt", movie.title);
-        movieImg.setAttribute("src", `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster_path}`);
-        movieByCategory.appendChild(movieImg)
-    });
+    createNewMovie(movieByCategory, movies)
 
 }
 
+//search movie 
 async function getSearchMovieQuery(query){
     
     const { data } = await api('search/movie', {
@@ -149,17 +164,57 @@ async function getSearchMovieQuery(query){
         },
       });
       const movies = data.results;
-      console.log(movies)
     const movieByCategory = document.querySelector('#movieByCategory');
-    movieByCategory.innerHTML = " "
+    createNewMovie(movieByCategory, movies)
+}
 
-    movies.forEach(movie => {
-        const movieImg = document.createElement("IMG");
-        movieImg.classList.add("movie-small-image");
-        movieImg.setAttribute("alt", movie.title);
-        movieImg.setAttribute("src", `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.poster_path}`);
-        movieByCategory.appendChild(movieImg)
+async function getMoreTrendsMovie() {
+    const { data } = await api('trending/movie/day');
+    const movies = data.results;
+    const categoryContainer = document.querySelector("#categoryTitleSearch");
+    categoryContainer.textContent = "Trends";
+    const movieByCategory = document.querySelector('#movieByCategory');
+
+    createNewMovie(movieByCategory, movies)
+}
+
+async function movieById(id) {
+    const { data: movie } = await api(`movie/${id}`);
+    movieHeader.style.backgroundImage = `url(https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/${movie.poster_path})`;
+    
+    moviePostHeader.innerHTML = " ";
+    const movieImg = document.createElement("IMG");
+    movieImg.classList.add("movie-small-search");
+    movieImg.classList.add("movie-mini-post");
+    movieImg.setAttribute("alt", movie.title);
+    movieImg.setAttribute("src", `https://www.themoviedb.org/t/p/w220_and_h330_face/${movie.backdrop_path}`);
+    moviePostHeader.appendChild(movieImg);
+
+    moviePostDescription.classList.add("movie-description-post")
+     moviePostDescription.textContent = movie.overview;
+    createTitle.textContent = movie.title;
+    createDest.textContent = movie.vote_average;
+
+    const category = movie.genres
+    containerCategoyMovie.innerHTML = " "
+    
+    category.forEach(category => {
+        const categoryContainer = document.createElement("P");
+        categoryContainer.classList.add("categori");
+        categoryContainer.textContent = category.name;
+        categoryContainer.setAttribute("id", category.id)
+        categoryContainer.addEventListener("click", () => {
+            location.hash = `#category=${category.id}-${category.name}`
+        })
+
+        containerCategoyMovie.appendChild(categoryContainer);
     });
-
+    getRecomendations(id)
+}
+async function getRecomendations(id) {
+    const { data: movie} = await api(`movie/${id}/recommendations`);
+    const movies = movie.results
+    const similarMovieContainer = document.querySelector("#similarMovieContainer")
+    createMovieOfHome(movies, similarMovieContainer)
 }
 
